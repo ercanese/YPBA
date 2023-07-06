@@ -42,3 +42,19 @@ Get-Process | Select-Object -Property NAme,ID,StartTime
 
 Get-NetFirewallRule | Get-Member
 get-NetFirewallRule | Select-Object -Property Status,Enabled,Name
+
+Get-Service | Select-Object -Skip 10 -First 4 
+Get-Service | Select-Object -Unique Status
+
+#Bana ekranda sadece disklerin Size ve ismini getiren komutu yazın.
+Get-Service | Select-Object  -Property Name, Size
+Get-Disk | Select-Object -Property FriendlyName,Size
+Get-Disk | Get-Member
+#Processleri CPU değerine göre sıralayarak ekranda en çok cpu tüketen processi tek olarak görelim.
+Get-Process | Sort-Object -Property CPU -Descending | Select-Object -Property Name -First 1
+Get-Process | Sort-Object -Property CPU -Descending | Select-Object -Property Name -Last 1
+Get-Process | Measure-Object -Property CPU -Maximum -Minimum
+#Makine üzerinde bulunan ip adreslerini listeleyelim fakat ekranda sadece ip addresi görünsün.
+Get-Command -Verb get -Noun "*IPAddress*"
+Get-NetIPAddress -AddressFamily IPv4  | Select-Object -Property IpAddress
+#
