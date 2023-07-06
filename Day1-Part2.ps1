@@ -32,3 +32,13 @@ Get-ChildItem -Path C:\ | Get-Member
 
 Get-ChildItem -Path C:\ -Recurse | Sort-Object -Property LastWriteTime -Descending
 #
+Get-Service | Measure-Object
+Get-NetFirewallRule | Measure-Object
+
+
+Get-Service | Get-Member
+Get-Service | Select-Object -Property Name,StartType,Status
+Get-Process | Select-Object -Property NAme,ID,StartTime
+
+Get-NetFirewallRule | Get-Member
+get-NetFirewallRule | Select-Object -Property Status,Enabled,Name
