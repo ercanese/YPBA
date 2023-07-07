@@ -58,3 +58,8 @@ Get-Process | Measure-Object -Property CPU -Maximum -Minimum
 Get-Command -Verb get -Noun "*IPAddress*"
 Get-NetIPAddress -AddressFamily IPv4  | Select-Object -Property IpAddress
 #
+
+#foreach
+#if
+#for
+#datatypes
