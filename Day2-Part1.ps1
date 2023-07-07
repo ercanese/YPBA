@@ -81,3 +81,29 @@ Get-Process  |
             (New-TimeSpan -Start $PSItem.Starttime -End (Get-Date) ).TotalMinutes
         }
     }
+
+
+#Filtreleme objesi
+Where-Object
+"Ercan" -eq "Ercan"
+"Ercan" -ceq "ercan"
+
+10 -gt 11
+10 -lt 11
+
+"Ercan" -like "*c*"
+"Ercan" -notlike "*c*"
+
+Get-Service |
+    Where-Object {$PSItem.Status -eq "Stopped"}
+
+Get-Service | Where-Object {
+    $PSItem.Name -eq "ALG"
+}
+
+Get-Service -Name ALG
+#Bana cpu değeri 10dan büyük olanları isme göre sıralayarak ekranda sadece name cpu değeri olacak sekilde görelim.
+#Volumelerden sizeremaining değeri 100gb altında olan volumeleri ekranda görelim.
+#Servislerdan starttype disabled olanları ekranda isme göre sıralı şekilde görelim.
+#bana 127.0 ile başlamaya iplerin tamamını getirin.
+#
