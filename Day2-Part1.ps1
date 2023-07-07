@@ -246,3 +246,110 @@ $Meyveler | Where-Object {$PSItem -eq "Kiraz"}
 $Meyveler[3]
 Write-Host "$($Meyveler[3])" -ForegroundColor Red
 Write-Host "$($Meyveler | Where-Object {$PSItem -eq "Kiraz"})" -ForegroundColor Red
+
+Key = Value
+
+$Demo = @{
+    "LON-DC1" = "127.0.0.10";
+    "LON-DC2" = "127.0.0.11";
+}
+
+
+
+#API Sorgusu
+
+curl --request GET \
+  --url 'https://api.collectapi.com/weather/getWeather?data.lang=tr&data.city=ankara' \
+  --header 'authorization: apikey 6oDvZosUGTwD4zJsygz1NF:7sY7If5yL6jHm4hfMCTDC8' \
+  --header 'content-type: application/json'
+
+
+$URL = "https://api.collectapi.com/weather/getWeather?data.lang=tr&data.city=ankara"
+$Header = @{
+    "authorization" = "apikey 6oDvZosUGTwD4zJsygz1NF:7sY7If5yL6jHm4hfMCTDC8"
+    "content-type"= "application/json"
+}
+
+$Ankara = Invoke-RestMethod -Uri $URL -Headers $Header
+$Ankara.result
+
+
+
+foreach($ataberke in $Meyveler)
+{
+
+}
+
+
+$Files = Get-ChildItem -Path C:\temp\YPBA\source
+foreach ($item in $Files)
+{
+    Move-Item -Path $item.fullname -Destination C:\temp\YPBA\Target
+    Write-Host "$($item.name) adlı dosya taşınmıştır" -ForegroundColor Green
+}
+
+
+#BITS winrm ve ALg servisini durdurun
+Stop-Service -Name winrm
+#Bu servisleri bir dizide tutun.
+#Bu servisleri teker teker çalıştırmaya çalışın.
+#Ve ekranada bilgilendirmeyi yazın.
+#$Ss = Get-Service -Name WinRM,ALG,BITS
+$Ss = "ALG","BITS","winrm"
+foreach ($item in $Ss)
+{
+    Start-Service -Name $item
+    Write-Host "$($item) adlı servis başlatıldı"
+}
+
+
+$Size = 11GB
+
+if($Size -le 10GB){
+    Write-Host "Size 10GB dan küçük veya eşit"
+}
+else
+{
+    Write-Host "Size 10GB dan büyük"
+}
+
+
+$FilePath = "C:\Program Files"
+
+if($FilePath -notlike "*Windows*")
+{
+    Write-Host "Windows içermiyor"
+}
+else
+{
+    Write-Host "Windows içeriyor"
+}
+
+
+
+#bana bir adet file path olusturun ve bu pathin sonunda / olup olmadığını kontrol eden kodu yazalım.
+$LogPath = "C:\Windows\"
+if($LogPath.EndsWith("\") -eq $false){
+    Write-Host "Sonunda slash yok."
+}
+else
+{
+    Write-Host "Sonunda slash var."
+}
+
+
+$Services = Get-Service 
+foreach ($item in $Services)
+{
+    if($item.Status -eq "Stopped" -and $item.StartType -eq "Automatic"){
+           Write-Host "$($item.Name)" -ForegroundColor Red
+    }
+    else
+    {
+        Write-Host "$($item.Name)" -ForegroundColor Green
+    }
+}
+
+Get-ChildItem -Path C:\temp\YPBA  | Get-Member
+Get-ChildItem -Path C:\temp\YPBA | Select-Object -Property FullName,LastWriteTime
+Get-Command -Verb * -Noun "*Item*" -Module Microsoft.PowerShell.Management 
