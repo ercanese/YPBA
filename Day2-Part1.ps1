@@ -103,7 +103,23 @@ Get-Service | Where-Object {
 
 Get-Service -Name ALG
 #Bana cpu değeri 10dan büyük olanları isme göre sıralayarak ekranda sadece name cpu değeri olacak sekilde görelim.
+Get-Process | 
+    Where-Object {$PSItem.CPU -gt 10} | Sort-Object -Property Name |
+        Select-Object -Property Name,cpu
+
+
 #Volumelerden sizeremaining değeri 100gb altında olan volumeleri ekranda görelim.
-#Servislerdan starttype disabled olanları ekranda isme göre sıralı şekilde görelim.
-#bana 127.0 ile başlamaya iplerin tamamını getirin.
-#
+Get-Volume |
+    Where-Object {
+        $PSItem.SizeRemaining -lt 100gb
+    }
+
+#Servislerden starttype disabled olanları ekranda isme göre sıralı şekilde görelim.
+Get-Service | 
+    Where-Object {
+        $PSItem.StartType -eq "Disabled"
+    } | Sort-Object -Property Name | Select-Object -Property Name,StartType
+
+#bana 127.0 ile başlamayan iplerin tamamını getirin.
+Get-NetIPAddress | Where-Object {$PSItem.IPAddress -notlike "127.0*"} | Select-Object -Property ipaddress
+Get-NetIPAddress | Where-Object {$PSItem.IPAddress -notlike "127.0.*"} | Select-Object -Property IPAddress
