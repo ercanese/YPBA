@@ -123,3 +123,58 @@ Get-Service |
 #bana 127.0 ile başlamayan iplerin tamamını getirin.
 Get-NetIPAddress | Where-Object {$PSItem.IPAddress -notlike "127.0*"} | Select-Object -Property ipaddress
 Get-NetIPAddress | Where-Object {$PSItem.IPAddress -notlike "127.0.*"} | Select-Object -Property IPAddress
+
+
+Get-Service | Where-Object {
+    $PSItem.StartType -eq "Automatic"
+} | Where-Object {
+    $PSItem.Status -eq "Stopped"
+}
+
+Get-Service | Where-Object {
+    $PSItem.Status -eq "Stopped" -and $PSItem.StartType -eq "Automatic"
+}
+
+Get-Service | 
+    Where-Object {$PSItem.StartType -eq "Disabled" -or $PSItem.StartType -eq "Automatic"} |
+        Out-File -FilePath C:\temp\YPBA\output\Servisler.txt
+
+Get-Service | Where-Object {
+    $PSItem.Status -eq "Stopped" -and $PSItem.StartType -eq "Automatic"
+} | Export-Csv -Path C:\temp\YPBA\output\Demo.csv 
+
+
+Get-Service | Where-Object {
+    $PSItem.Status -eq "Stopped" -and $PSItem.StartType -eq "Automatic"
+} | Select-Object -Property Name,StartType,Status | ConvertTo-Json | 
+    Out-File -FilePath C:\temp\YPBA\output\Servisler.json
+
+
+
+"ufuk" | Out-File -FilePath C:\temp\YPBA\output\deneme.txt
+"ufuk" | Export-Csv -Path C:\t\dsd.cx
+
+
+$YPNames = "Serhat"
+$Num1 = 10
+$Num2 = 20
+
+$Toplam = $Num1 + $num2
+$YPSurNames = "SALMAN"
+
+$FullName = $YPNames + " " + $YPSurNames
+
+$ALG = Get-Service -Name ALG
+(Get-Service -Name ALG).Name
+$ALG.Name
+
+Write-Host "$($ALG.Name)" #-ForegroundColor Red -BackgroundColor Cyan
+$ALG = $null
+
+#2 adet değişken oluşturalım 1 tanesinin değeri 100 diğerinin değeri 150 olsun
+#Bu iki değişkeni çarparak toplam değişkenine eşitleyelim.
+
+#LogPath adında bir değişken oluşturalım ve içerisine C:\Windows pathini tanımlayalım.
+
+#En çok cpu tüketen proccesi bularak bir değişkende tutalım ve erkanda o processin sadece cpu değerini
+#yalın halde kırmızı olarak gösterelim.
