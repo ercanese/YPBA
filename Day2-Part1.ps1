@@ -350,6 +350,11 @@ foreach ($item in $Services)
     }
 }
 
+
+#Servisler eğer dumuşta kırmızı durmamışsa yeşil olarak erkanda görünsün.
+#Servisler eğer durmuşsa stopped.txt içerisine çalışıyorsa running.txt içerisine eklensin. ipucu: out-file append
+#Processler eğer cpusu 10dan büyükse kırmızı küçükse yeşil olarak ekranda görelim.
+
 Get-ChildItem -Path C:\temp\YPBA  | Get-Member
 Get-ChildItem -Path C:\temp\YPBA | Select-Object -Property FullName,LastWriteTime
 Get-Command -Verb * -Noun "*Item*" -Module Microsoft.PowerShell.Management 
