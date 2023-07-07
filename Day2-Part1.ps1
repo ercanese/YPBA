@@ -70,3 +70,14 @@ Get-ChildItem -Path C:\ -Directory | Select-Object -Property Name,FullName,LastW
 }
 
 #Bana makinede çalışan processlerin kac dakikadır çalıştıgını bulan komutu yazın.
+
+Get-Process | Get-Member
+Get-Process | Select-Object -Property NAme,StartTime
+
+Get-Process  | 
+    Select-Object -Property Name,StarTime,@{
+        n='ProcessAge';
+        e={
+            (New-TimeSpan -Start $PSItem.Starttime -End (Get-Date) ).TotalMinutes
+        }
+    }
