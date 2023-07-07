@@ -173,8 +173,76 @@ $ALG = $null
 
 #2 adet değişken oluşturalım 1 tanesinin değeri 100 diğerinin değeri 150 olsun
 #Bu iki değişkeni çarparak toplam değişkenine eşitleyelim.
+$Sayi1 = 100
+$Sayi2 = 150
+
+$T = $Sayi1 * $Sayi2
 
 #LogPath adında bir değişken oluşturalım ve içerisine C:\Windows pathini tanımlayalım.
 
+$LogPath = "C:\Windows"
+
 #En çok cpu tüketen proccesi bularak bir değişkende tutalım ve erkanda o processin sadece cpu değerini
 #yalın halde kırmızı olarak gösterelim.
+
+
+$Y3 = Get-Process | Sort-Object CPU -Descending | Select-Object -First 1 -ForegroundColor Red
+
+$CPU = Get-Process | Sort-Object -Property CPU -Descending | Select-Object -Property CPU,Name -First 1
+Write-Host "$($CPU.CPU)" -ForegroundColor Red
+
+
+$LogPath.GetType()
+$Sayi1.GetType()
+[datetime]$today = "07/07/2023"
+
+[int]$Naber = "Benbir sayıyım haha"
+
+[int]$D = "10"
+$d.GetType()
+
+$today | Get-Member
+
+$today.DayOfYear
+$today | Get-Member
+$today.AddDays(-10)
+
+
+$Email = "ercan.ese@bilgeadam.com"
+$Email | Get-Member
+$Email.Split('@')
+
+$LogPath = "C:\Windows"
+$LogPath = $LogPath.Replace("C:","D:")
+
+
+$Names = "Yekta","Ercan","Serhat","Baris"
+$Names.GetType()
+
+$Services = Get-Service 
+$Services.GetType()
+
+$N = "",""
+$N = @("","")
+$N = @()
+
+$N = $N + "Demo2"
+
+$N += "Demo6"
+
+$Services[2].Name
+$Services |Select-Object -First 1
+
+
+#Bana meyveler adında bir dizi oluşturun ve içerisine Elma,Armut,Muz,Kiraz değerlerini ekleyin
+$Meyveler = "Elma","Armut","Muz","Kiraz"
+#Eklediğiniz bu değerlerden 3. Indexdeki elemanı ekrana yazdırın.
+$Meyveler[2]
+$Meyveler | Select-Object -First 1 -Skip 2
+#Elemanları ekledikten sonra Ahududu meyvesinide bu diziye dahil edin.
+$Meyveler += "Ahududu"
+#Ekranda Kiraz meyvesi Kırmızı olarak yazılacak sekilde bir komut yazalım.
+$Meyveler | Where-Object {$PSItem -eq "Kiraz"}
+$Meyveler[3]
+Write-Host "$($Meyveler[3])" -ForegroundColor Red
+Write-Host "$($Meyveler | Where-Object {$PSItem -eq "Kiraz"})" -ForegroundColor Red
