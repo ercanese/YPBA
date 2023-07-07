@@ -351,9 +351,56 @@ foreach ($item in $Services)
 }
 
 
-#Servisler eğer dumuşta kırmızı durmamışsa yeşil olarak erkanda görünsün.
+#Servisler eğer dumuşsa kırmızı durmamışsa yeşil olarak erkanda görünsün.
+$Servisler = Get-Service 
+foreach ($item in $Servisler)
+{
+    if($item.Status -eq "Stopped")
+    {
+        Write-Host "$($item.Name) adlı servis durmustur." -ForegroundColor Red
+    }
+    else
+    {
+        Write-Host "$($item.Name) adlı servis çalışıyor." -ForegroundColor Green
+    }
+}
+
+
+
+
+
 #Servisler eğer durmuşsa stopped.txt içerisine çalışıyorsa running.txt içerisine eklensin. ipucu: out-file append
+
+"Ercan" | Out-File -FilePath C:\temp\YPBA\output\Deneme123.txt -Append
+$Servisler = Get-Service 
+foreach ($item in $Servisler)
+{
+    if($item.Status -eq "Stopped")
+    {
+        $item.Name | Out-File -FilePath C:\temp\YPBA\output\stopped.txt -Append
+    }
+    else
+    {
+        $item.Name | Out-File -FilePath C:\temp\YPBA\output\running.txt -Append
+    }
+}
+
+
 #Processler eğer cpusu 10dan büyükse kırmızı küçükse yeşil olarak ekranda görelim.
+$Process = Get-Process 
+
+foreach($p in $Process){
+    if($p.cpu -ge 10)
+    {
+        Write-Host "$($p.Name)" -ForegroundColor Red
+    }
+    else
+    {
+        Write-Host "$($p.Name)" -ForegroundColor Green
+    }
+}
+
+
 
 Get-ChildItem -Path C:\temp\YPBA  | Get-Member
 Get-ChildItem -Path C:\temp\YPBA | Select-Object -Property FullName,LastWriteTime
